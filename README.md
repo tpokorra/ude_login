@@ -21,7 +21,7 @@ username2<tab>default_host=imap2.domain.tld<tab>disable_plugins=acl
 ```
 
 The first column identifies the login username. Following columns contain
-any number of <key>=<value> pairs, their order is not relevant. <key> can
+any number of `<key>=<value>` pairs, their order is not relevant. `<key>` can
 correspond to any valid Roundcube config option which is overridden with
 the given value. The following special keys are handled separately:
 
