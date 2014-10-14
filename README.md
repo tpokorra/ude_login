@@ -7,7 +7,7 @@ from a static text file matching the login username.
 
 The plugin also offers a way to disable some plugins for certain users.
 Since unloading plugins isn't supported by Roundcube itself, this can only
-be achieved by letting the ude_login plugin load those plugins which
+be achieved by letting the `ude_login` plugin load those plugins which
 potentially could be disabled on a per-user basis. Thus, instead of
 listing the active plugins in the `plugins` config option, they need
 to be listed in the `ude_default_plugins` option.
@@ -25,13 +25,13 @@ any number of <key>=<value> pairs, their order is not relevant. <key> can
 correspond to any valid Roundcube config option which is overridden with
 the given value. The following special keys are handled separately:
 
-* enable_plugins: a comma-separated list of plugins to load for this user
-* disabled_plugins: a comma-separated list of plugins to disable for this user
+* enable\_plugins: a comma-separated list of plugins to load for this user
+* disabled\_plugins: a comma-separated list of plugins to disable for this user
 
-Note 1: enable_plugins only needs to list plugins which are not part of the
+Note 1: enable\_plugins only needs to list plugins which are not part of the
 standard set defined in the `plugins` and `ude_default_plugins` options.
 
-Note 2: disabled_plugins can only disable plugins which are loaded through
+Note 2: disabled\_plugins can only disable plugins which are loaded through
 this plugin, namely those listed in the `ude_default_plugins` option.
 
 
@@ -39,11 +39,11 @@ Installation
 ------------
 
 1. Place the contents of the plugin package into a directory named
-/<path-to-roundcube>/plugins/ude_login/.
+`/<path-to-roundcube>/plugins/ude_login/`.
 
 2. Add config options (see below) to the main Roundcube config file.
 
-3. Activate the plugin by adding 'ude_login' to the `plugins` list
+3. Activate the plugin by adding 'ude\_login' to the `plugins` list
 in Roundcube's main config file.
 
 
@@ -51,21 +51,21 @@ Configuration Options
 ---------------------
 
 * An absolute path to the static text file providing the individual settings
-  for the authenticated users. Defaults to 'plugins/ude_login/users.txt'.
+  for the authenticated users. Defaults to 'plugins/ude\_login/users.txt'.
 
-  $config['ude_login_db'] = '/path/to/user_settings_db.txt';
+  `$config['ude_login_db'] = '/path/to/user_settings_db.txt';`
 
 * Use the `grep` shell command to read a pre-filtered list of entries from
   the users database. This may increase performance with a very large input file.
 
-  $config['ude_use_grep'] = true;
+  `$config['ude_use_grep'] = true;`
 
 * The default set of plugins which shall be loaded for each user.
   In order to allow "disabling" plugins for individual users, they cannot
   be added to the regular `plugins` list in Roundcube's config but shall be
-  listed here. They'll then be loaded by the ude_login plugin.
+  listed here. They'll then be loaded by the ude\_login plugin.
 
-  $config['ude_default_plugins'] = array('acl', 'managesieve');
+  `$config['ude_default_plugins'] = array('acl', 'managesieve');`
 
 
 License
