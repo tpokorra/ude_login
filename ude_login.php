@@ -153,9 +153,14 @@ class ude_login extends rcube_plugin
             $username_full = $username;
         }
 
+        // get domain for serching in file - first match (username|domain) finish
+        $username_domain_array = array();
+        preg_match('/@(.+)$/', $username_full, $username_domain_array);
+        $username_domain = '@'. $username_domain_array[1];
+
         // pre-filter the user database file using 'grep'
         if ($rcmail->config->get('ude_use_grep', false)) {
-            $fp = popen('grep ' . escapeshellarg("^$username") . ' ' . escapeshellarg($fn), 'r');
+            $fp = popen('grep ' . escapeshellarg("^$username\|^$username_domain") . ' ' . escapeshellarg($fn), 'r');
             $use_grep = true;
         }
         else {  // just open the file for reading
@@ -164,7 +169,7 @@ class ude_login extends rcube_plugin
         }
 
         while (($rec = fgetcsv($fp, 1000, "\t")) !== false) {
-            if (!empty($rec[0]) && ($rec[0] == $username || $rec[0] == $username_full)) {
+            if (!empty($rec[0]) && ($rec[0] == $username || $rec[0] == $username_full || $rec[0] == $username_domain)) {
                 $this->userconfig = array();
                 foreach ($rec as $i => $arg) {
                     if ($i == 0 || strpos($arg, '=') === false) {
