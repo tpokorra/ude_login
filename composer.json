@@ -3,7 +3,7 @@
     "type": "roundcube-plugin",
     "description": "Allows to specify configuration settings such as IMAP/SMTP servers, active plugins, etc. on a per-user level using a static text file.",
     "keywords": ["authentication","settings"],
-    "homepage": "https://gitorious.org/kolab-roundcube-plugins/ude-login",
+    "homepage": "https://gitlab.com/kolab-roundcube-plugins/ude-login",
     "license": "GNU GPLv3+",
     "authors": [
         {
