@@ -92,6 +92,9 @@ class ude_login extends rcube_plugin
                     else if ($plugin == 'tasklist') {
                         $rcmail->config->set('tasklist_disabled', true);
                     }
+                    else if ($plugin == 'kolab_files') {
+                        $rcmail->config->set('kolab_files_disabled', true);
+                    }
                 }
             }
 
