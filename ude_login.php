@@ -57,6 +57,11 @@ class ude_login extends rcube_plugin
             // apply user-specific settings to config
             foreach ($this->userconfig as $prop => $value) {
                 if (strpos($prop, 'plugins') === false) {
+                    if ($value == "false") {
+                        $value = false;
+                    } else if ($value == "true") {
+                        $value = true;
+                    }
                     $rcmail->config->set($prop, $value);
                 }
             }
