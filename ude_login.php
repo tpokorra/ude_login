@@ -37,6 +37,9 @@ class ude_login extends rcube_plugin
     {
         $this->add_hook('authenticate', array($this, 'authenticate'));
 
+        // load plugin configuration
+        $this->load_config();
+
         // load user-specific config from session data
         $this->startup(array());
     }
