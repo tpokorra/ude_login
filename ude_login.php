@@ -97,7 +97,7 @@ class ude_login extends rcube_plugin
 
             // load (remaining) user-specific plugins
             foreach (array_unique($user_plugins) as $plugin) {
-                $rcmail->plugins->load_plugin($plugin);
+                $this->require_plugin($plugin);
             }
         }
     }
