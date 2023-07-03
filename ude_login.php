@@ -172,6 +172,11 @@ class ude_login extends rcube_plugin
         }
 
         while (($rec = fgetcsv($fp, 1000, "\t")) !== false) {
+            if (count($rec) == 1) {
+                error_log("ude_login: missing separators in csv file");
+                continue;
+            }
+
             if (!empty($rec[0]) && ($rec[0] == $username || $rec[0] == $username_full || $rec[0] == $username_domain)) {
                 $this->userconfig = array();
                 foreach ($rec as $i => $arg) {
