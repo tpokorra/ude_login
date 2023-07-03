@@ -48,7 +48,7 @@ class ude_login extends rcube_plugin
     {
         $rcmail = rcube::get_instance();
 
-        if (is_array($_SESSION['ude_config']) && $rcmail->task != 'logout') {
+        if (array_key_exists('ude_config', $_SESSION) && is_array($_SESSION['ude_config']) && $rcmail->task != 'logout') {
             $this->userconfig = $_SESSION['ude_config'];
 
             // apply user-specific settings to config
@@ -153,10 +153,13 @@ class ude_login extends rcube_plugin
             $username_full = $username;
         }
 
-        // get domain for serching in file - first match (username|domain) finish
+        // get domain for searching in file - first match (username|domain) finish
         $username_domain_array = array();
-        preg_match('/@(.+)$/', $username_full, $username_domain_array);
-        $username_domain = '@'. $username_domain_array[1];
+        if (preg_match('/@(.+)$/', $username_full, $username_domain_array) !== false) {
+            $username_domain = '@'. $username_domain_array[1];
+        } else {
+            $username_domain = '';
+        }
 
         // pre-filter the user database file using 'grep'
         if ($rcmail->config->get('ude_use_grep', false)) {
