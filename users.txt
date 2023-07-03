@@ -1,2 +1,2 @@
-sampleuser	default_host=localhost	smtp_server=localhost	enable_plugins=acl,managesieve,zipdownload	disable_plugins=calendar
-anotheruser	default_host=example.net	smtp_server=mail.example.net	enable_plugins=acl
+sampleuser	default_host=localhost	smtp_host=localhost	enable_plugins=acl,managesieve,zipdownload	disable_plugins=calendar
+anotheruser	default_host=example.net	smtp_host=mail.example.net	enable_plugins=acl
