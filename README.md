@@ -16,7 +16,7 @@ The user settings file is a tab-separated text file with the following
 schema:
 
 ```
-username1<tab>default_host=imap1.domain.tld<tab>smtp_server=smtp1.domain.tld<tab>enable_plugins=calendar<tab>disable_plugins=acl,managesieve
+username1<tab>default_host=imap1.domain.tld<tab>smtp_host=smtp1.domain.tld<tab>enable_plugins=calendar<tab>disable_plugins=acl,managesieve
 username2<tab>default_host=imap2.domain.tld<tab>disable_plugins=acl
 ```
 

@@ -51,7 +51,7 @@ class ude_login extends rcube_plugin
     {
         $rcmail = rcube::get_instance();
 
-        if (is_array($_SESSION['ude_config']) && $rcmail->task != 'logout') {
+        if (array_key_exists('ude_config', $_SESSION) && is_array($_SESSION['ude_config']) && $rcmail->task != 'logout') {
             $this->userconfig = $_SESSION['ude_config'];
 
             // apply user-specific settings to config
@@ -114,7 +114,7 @@ class ude_login extends rcube_plugin
 
             // load (remaining) user-specific plugins
             foreach (array_unique($user_plugins) as $plugin) {
-                $rcmail->plugins->load_plugin($plugin);
+                $this->require_plugin($plugin);
             }
         }
     }
@@ -170,10 +170,13 @@ class ude_login extends rcube_plugin
             $username_full = $username;
         }
 
-        // get domain for serching in file - first match (username|domain) finish
+        // get domain for searching in file - first match (username|domain) finish
         $username_domain_array = array();
-        preg_match('/@(.+)$/', $username_full, $username_domain_array);
-        $username_domain = '@'. $username_domain_array[1];
+        if (preg_match('/@(.+)$/', $username_full, $username_domain_array) !== false) {
+            $username_domain = '@'. $username_domain_array[1];
+        } else {
+            $username_domain = '';
+        }
 
         // pre-filter the user database file using 'grep'
         if ($rcmail->config->get('ude_use_grep', false)) {
@@ -186,6 +189,11 @@ class ude_login extends rcube_plugin
         }
 
         while (($rec = fgetcsv($fp, 1000, "\t")) !== false) {
+            if (count($rec) == 1) {
+                error_log("ude_login: missing separators in csv file");
+                continue;
+            }
+
             if (!empty($rec[0]) && ($rec[0] == $username || $rec[0] == $username_full || $rec[0] == $username_domain)) {
                 $this->userconfig = array();
                 foreach ($rec as $i => $arg) {
