@@ -155,7 +155,7 @@ class ude_login extends rcube_plugin
 
         // get domain for searching in file - first match (username|domain) finish
         $username_domain_array = array();
-        if (preg_match('/@(.+)$/', $username_full, $username_domain_array) !== false) {
+        if (preg_match('/@(.+)$/', $username_full, $username_domain_array) === 1) {
             $username_domain = '@'. $username_domain_array[1];
         } else {
             $username_domain = '';
